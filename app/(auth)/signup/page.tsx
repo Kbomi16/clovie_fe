@@ -59,8 +59,8 @@ export default function SignupPage() {
   }
 
   return (
-    <PageContainer className="flex min-h-screen flex-col items-center justify-center">
-      <Magnet padding={50} disabled={false} magnetStrength={50}>
+    <PageContainer className="flex flex-col items-center justify-center">
+      <Magnet disabled={false} magnetStrength={20}>
         <div className="my-10 flex items-center justify-center gap-4">
           <Link href={'/'}>
             <Image
@@ -148,12 +148,14 @@ export default function SignupPage() {
 
         <div className="text-md mt-10 flex items-center justify-center gap-4">
           <p>이미 계정이 있으신가요?</p>
-          <Link
-            href="/login"
-            className="text-primary decoration-primary-40 underline underline-offset-2"
-          >
-            로그인하기
-          </Link>
+          <Magnet disabled={false} magnetStrength={20}>
+            <Link
+              href="/login"
+              className="text-primary decoration-primary-40 underline underline-offset-2"
+            >
+              로그인하기
+            </Link>
+          </Magnet>
         </div>
       </form>
     </PageContainer>

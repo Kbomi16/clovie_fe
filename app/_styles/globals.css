@@ -100,7 +100,7 @@ body {
   color: var(--foreground);
   font-family: 'Pretendard-Regular', Arial, Helvetica, sans-serif;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 }
 
 body::before {
@@ -154,13 +154,13 @@ body::before {
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #9fa6b2;
+    background-color: #f1f1f5;
     border-radius: 4px;
     border: 2px solid transparent;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #6e6e82;
+    background-color: #f1f1f5;
     cursor: pointer;
   }
 }
