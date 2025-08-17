@@ -1,11 +1,28 @@
+import Link from 'next/link'
+import Button from './_components/Button'
+
 export default function home() {
   return (
-    <div className="bg-primary">
+    <div>
       HOME
       <div className="relative inline-block overflow-hidden rounded">
-        <button className="btn-grad-green flex rounded-md via-[#43a047] p-4 text-white [--angle:135deg] [--end:#81c784] [--start:#2e7d32] hover:[--angle:160deg] hover:[--end:#2e7d32] hover:[--start:#81c784] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40">
+        <Button>버튼</Button>
+        <Button type="primary">버튼</Button>
+        <Button type="dashed">버튼</Button>
+        <Button type="text">버튼</Button>
+        <Button disabled>버튼</Button>
+        <Button disabled type="primary">
           버튼
-        </button>
+        </Button>
+        <Button disabled type="dashed">
+          버튼
+        </Button>
+        <Button disabled type="text">
+          버튼
+        </Button>
+      </div>
+      <div>
+        <Link href="/login">로그인페이지</Link>
       </div>
     </div>
   )

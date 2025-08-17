@@ -3,9 +3,6 @@
 @theme {
   --color-primary: #43a047;
   --color-custom-black: #17171c;
-  --color-custom-gray-100: #6e6e82;
-  --color-custom-gray-200: #9fa6b2;
-  --color-custom-gray-300: #21212a;
   --color-custom-white: #f1f1f5;
   --color-custom-pink: #e3c4e0;
   --color-custom-yellow: #fde4c0;
@@ -44,7 +41,8 @@
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
     background-color: transparent !important;
-    -webkit-text-fill-color: var(--color-custom-white) !important;
+    color-scheme: light dark;
+    -webkit-text-fill-color: var(--color-custom-foreground) !important;
     -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
     transition: background-color 5000s ease-in-out 0s;
   }
@@ -52,12 +50,12 @@
 
 @property --start {
   syntax: '<color>';
-  initial-value: #6a5af9;
+  initial-value: #2e7d32;
   inherits: false;
 }
 @property --end {
   syntax: '<color>';
-  initial-value: #00d4ff;
+  initial-value: #81c784;
   inherits: false;
 }
 @property --angle {
@@ -82,13 +80,8 @@
 }
 
 :root {
-  --background: #17171b;
-  --foreground: #ededed;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --background: #ededed;
+  --foreground: #17171b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -106,6 +99,47 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Pretendard-Regular', Arial, Helvetica, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(241, 241, 245, 0.3) 0,
+      transparent 200px
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(227, 196, 224, 0.25) 0,
+      transparent 250px
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(253, 228, 192, 0.2) 0,
+      transparent 180px
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(185, 206, 255, 0.2) 0,
+      transparent 220px
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 181, 170, 0.25) 0,
+      transparent 160px
+    ),
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(129, 199, 132, 0.2) 0,
+      transparent 200px
+    );
 }
 
 /* 스크롤바 기본 설정 */
