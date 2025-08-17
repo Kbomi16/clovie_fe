@@ -10,8 +10,12 @@ import { z } from 'zod'
 import Image from 'next/image'
 import logo from '@/public/clovie_logo.png'
 import { signupSchema } from '@/app/_utils/signupSchema'
-import { useRef } from 'react'
 import Magnet from '@/app/_components/Magnet'
+import { signup } from '@/app/_apis/auth/auth'
+import { useMutation } from '@tanstack/react-query'
+import { notify } from '@/app/_components/Toast'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
 
 type SignupFormData = z.infer<typeof signupSchema>
 
@@ -24,9 +28,29 @@ export default function SignupPage() {
     resolver: zodResolver(signupSchema),
   })
 
+  const router = useRouter()
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: signup,
+    onSuccess: (data) => {
+      notify('success', '회원가입이 완료되었습니다. 로그인해주세요.')
+      router.push('/login')
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        notify('error', error.response?.data?.message || '회원가입 실패')
+      } else if (error instanceof Error) {
+        notify('error', error.message)
+      } else {
+        notify('error', '회원가입에 실패했습니다. 다시 시도해주세요.')
+      }
+    },
+  })
+
   const onSubmit = (data: SignupFormData) => {
-    console.log('로그인 데이터', data)
-    // TODO: API 호출
+    const { confirmPassword, ...signupData } = data
+    console.log(signupData)
+    mutate(signupData)
   }
 
   return (
