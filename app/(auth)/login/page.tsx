@@ -10,6 +10,11 @@ import { z } from 'zod'
 import Image from 'next/image'
 import logo from '@/public/clovie_logo.png'
 import Magnet from '@/app/_components/Magnet'
+import { useRouter } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+import { login } from '@/app/_apis/auth/auth'
+import { notify } from '@/app/_components/Toast'
+import axios from 'axios'
 
 type LoginFormData = z.infer<typeof loginSchema>
 
@@ -22,9 +27,33 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   })
 
+  const router = useRouter()
+
+  const { mutate } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      notify(
+        'success',
+        <>
+          로그인 성공! <br /> clovie를 즐겨주세요.
+        </>,
+      )
+      router.push('/')
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        notify('error', error.response?.data?.message || '로그인 실패')
+      } else if (error instanceof Error) {
+        notify('error', error.message)
+      } else {
+        notify('error', '로그인에 실패했습니다. 다시 시도해주세요.')
+      }
+    },
+  })
+
   const onSubmit = (data: LoginFormData) => {
-    console.log('로그인 데이터', data)
-    // TODO: API 호출
+    console.log(data)
+    mutate(data)
   }
 
   return (

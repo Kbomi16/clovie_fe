@@ -30,10 +30,15 @@ export default function SignupPage() {
 
   const router = useRouter()
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: signup,
     onSuccess: (data) => {
-      notify('success', '회원가입이 완료되었습니다. 로그인해주세요.')
+      notify(
+        'success',
+        <>
+          회원가입 성공! <br /> 로그인 페이지로 이동합니다.
+        </>,
+      )
       router.push('/login')
     },
     onError: (error) => {

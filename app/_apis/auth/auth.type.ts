@@ -17,3 +17,22 @@ export type SignupResponse = {
     updatedAt: string
   }
 }
+
+export type LoginData = {
+  email: string
+  password: string
+}
+
+export type LoginResponse = {
+  message: string
+  user: {
+    id: string
+    email: string
+    nickname: string
+    grade: string
+    points: number
+    createdAt: string
+    updatedAt: string
+  }
+  accessToken: string
+}
